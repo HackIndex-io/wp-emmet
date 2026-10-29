@@ -1,11 +1,15 @@
 <?php
 /*
-Plugin Name: WP Emmet
+Plugin Name: WP Emmet (HackIndex Patched)
 Plugin URI: https://github.com/rewish/wp-emmet
-Description: Emmet (ex-Zen Coding) for WordPress.
-Version: 0.3.4
+Description: Emmet (ex-Zen Coding) for WordPress. (HackIndex Patched)
+Version: 0.3.5
 Author: rewish
 Author URI: https://github.com/rewish
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Modified by HackIndex on 2026-10-29: security fixes. Fork of https://github.com/rewish/wp-emmet
 */
 require_once dirname(__FILE__) . '/WP/Emmet.php';
 
