@@ -1,4 +1,5 @@
 <?php
+// Modified by HackIndex on 2026-10-29: security fixes. Fork of https://github.com/rewish/wp-emmet
 class WP_Emmet_FormHelper {
 	/**
 	 * Base of Name attributes
@@ -88,7 +89,7 @@ class WP_Emmet_FormHelper {
 				$value = 'selected';
 			}
 			if ($value !== false) {
-				$value = "$key=\"$value\"";
+				$value = $key . '="' . esc_attr($value) . '"';
 			}
 		}
 		return implode(' ', $attributes);
@@ -198,7 +199,7 @@ class WP_Emmet_FormHelper {
 			$label = $value;
 		}
 
-		return sprintf('<option value="%s" %s>%s</option>', $value, $attrs, $label);
+		return sprintf('<option value="%s" %s>%s</option>', esc_attr($value), $attrs, esc_html($label));
 	}
 
 	/**
@@ -233,6 +234,6 @@ class WP_Emmet_FormHelper {
 	 */
 	public function textarea($name, Array $attributes = array()) {
 		$attrs = $this->attributes($attributes + array('name' => $this->name($name)));
-		return sprintf('<textarea %s>%s</textarea>', $attrs, $this->value($name));
+		return sprintf('<textarea %s>%s</textarea>', $attrs, esc_textarea($this->value($name)));
 	}
 }

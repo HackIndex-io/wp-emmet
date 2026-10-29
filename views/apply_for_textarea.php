@@ -1,3 +1,4 @@
+<?php /* Modified by HackIndex on 2026-10-29: security fixes. Fork of https://github.com/rewish/wp-emmet */ ?>
 <script>
 jQuery(function($) {
 	var config = <?php echo $this->Options->toJSON('textarea'); ?>,
@@ -12,7 +13,7 @@ jQuery(function($) {
 
 	// Set shortcuts
 <?php foreach ($shortcuts as $label => $keystroke): ?>
-	textarea.addShortcut('<?php echo $keystroke; ?>', '<?php echo str_replace(array(' ', '/', '.'), array('_', '_', ''), strtolower($label)); ?>');
+	textarea.addShortcut('<?php echo esc_js($keystroke); ?>', '<?php echo esc_js(str_replace(array(' ', '/', '.'), array('_', '_', ''), strtolower($label))); ?>');
 <?php endforeach; ?>
 <?php endif; ?>
 });

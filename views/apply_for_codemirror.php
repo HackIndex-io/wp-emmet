@@ -1,6 +1,7 @@
+<?php /* Modified by HackIndex on 2026-10-29: security fixes. Fork of https://github.com/rewish/wp-emmet */ ?>
 <style>
 .CodeMirror {
-<?php echo $this->Options->get('codemirror_style') . PHP_EOL; ?>
+<?php echo wp_strip_all_tags($this->Options->get('codemirror_style')) . PHP_EOL; ?>
 	z-index: 101;
 }
 
@@ -19,7 +20,7 @@
 <?php if ($this->Options->get('override_shortcuts')): ?>
 var emmetKeymap = {
 <?php foreach ($shortcuts as $label => $keystroke): ?>
-	'<?php echo $keystroke; ?>': '<?php echo str_replace(array(' ', '/', '.'), array('_', '_', ''), strtolower($label)); ?>',
+	'<?php echo esc_js($keystroke); ?>': '<?php echo esc_js(str_replace(array(' ', '/', '.'), array('_', '_', ''), strtolower($label))); ?>',
 <?php endforeach; ?>
 	Tab: 'expand_abbreviation_with_tab',
 	Enter: 'insert_formatted_line_break_only'
@@ -28,7 +29,7 @@ var emmetKeymap = {
 
 jQuery(function($) {
 	var options = $.extend(<?php echo $this->Options->toJSON('codemirror'); ?>, {
-		profile: '<?php echo $this->Options->get('profile'); ?>'
+		profile: '<?php echo esc_js($this->Options->get('profile')); ?>'
 	});
 
 	var mimeTypes = {

@@ -1,3 +1,4 @@
+<?php /* Modified by HackIndex on 2026-10-29: security fixes. Fork of https://github.com/rewish/wp-emmet */ ?>
 <div class="wrap" data-use-editor-type="<?php echo $this->options['use_codemirror'] ? 'codemirror' : 'textarea'; ?>">
 	<div id="icon-options-general" class="icon32"><br></div>
 	<h2>Emmet</h2>
@@ -44,7 +45,7 @@
 <?php				if ($this->options['textarea']['variables']['indentation'] === "\t"): ?>
 							<input type="text" id="<?php echo $this->name; ?>_var_indentation_text" name="<?php echo $this->name; ?>[textarea][variables][indentation]" value="" disabled="disabled"  class="small-text">
 <?php				else: ?>
-							<input type="text" id="<?php echo $this->name; ?>_var_indentation_text" name="<?php echo $this->name; ?>[textarea][variables][indentation]" value="<?php echo $this->options['textarea']['variables']['indentation']; ?>" class="small-text">
+							<input type="text" id="<?php echo $this->name; ?>_var_indentation_text" name="<?php echo $this->name; ?>[textarea][variables][indentation]" value="<?php echo esc_attr($this->options['textarea']['variables']['indentation']); ?>" class="small-text">
 <?php				endif; ?>
 						<input type="checkbox" id="<?php echo $this->name; ?>_var_indentation" name="<?php echo $this->name; ?>[textarea][variables][indentation]" value="<?php echo "\t"; ?>"<?php if ($this->options['textarea']['variables']['indentation'] === "\t") echo ' checked="checked"'; ?>>
 						<label for="<?php echo $this->name; ?>_var_indentation"><?php _e('Use hard tabs', $domain); ?></label>
@@ -140,8 +141,8 @@
 			<tbody>
 <?php		foreach ($this->options['shortcuts'] as $label => $keystroke): ?>
 				<tr>
-					<th><?php _e($label, $domain); ?></th>
-					<td><input type="text" name="<?php echo $this->name; ?>[shortcuts][<?php echo $label; ?>]" value="<?php echo $keystroke; ?>"></td>
+					<th><?php echo esc_html(__($label, $domain)); ?></th>
+					<td><input type="text" name="<?php echo $this->name; ?>[shortcuts][<?php echo esc_attr($label); ?>]" value="<?php echo esc_attr($keystroke); ?>"></td>
 				</tr>
 <?php		endforeach; ?>
 			</tbody>

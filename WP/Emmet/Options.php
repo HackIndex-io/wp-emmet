@@ -1,6 +1,8 @@
 <?php
 /**
  * WP Emmet Options
+ *
+ * Modified by HackIndex on 2026-10-29: security fixes. Fork of https://github.com/rewish/wp-emmet
  */
 class WP_Emmet_Options {
 	/**
@@ -192,7 +194,7 @@ class WP_Emmet_Options {
 	 * @return string
 	 */
 	public function toJSON($key = null) {
-		return json_encode($this->get($key, true));
+		return wp_json_encode($this->get($key, true), JSON_HEX_TAG | JSON_HEX_AMP);
 	}
 
 	/**
